@@ -75,14 +75,6 @@
                       />
                     </div>
                   </div>
-                  <!-- <select id="ingredient" class="form-control">
-                    <option
-                      v-for="ingrediente of ingredients"
-                      v-bind:key="ingrediente.id"
-                      :value="ingrediente.id"
-                      >{{ ingrediente.name }}</option
-                    >
-                  </select> -->
                 </div>
               </div>
               <div class="modal-footer">
@@ -191,6 +183,8 @@
                 <td class="align-middle">
                   <div class="btn-group" role="group">
                     <button
+                      id="btnEditar"
+                      type="button"
                       class="btn btn-primary"
                       title="Editar"
                       @click="btnEditar(pizza.id, pizza.name, pizza.origin)"
@@ -212,6 +206,77 @@
                         />
                       </svg>
                     </button>
+
+                    <!-- <div
+                      class="modal fade"
+                      id="modalEditarPizza"
+                      tabindex="-1"
+                      role="dialog"
+                      aria-labelledby="exampleModalLabel"
+                      aria-hidden="true"
+                    >
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header text-white bg-primary">
+                            <h5 class="modal-title" id="exampleModalLabel">
+                              Editar Pizza
+                            </h5>
+                            <button
+                              type="button"
+                              class="close"
+                              data-dismiss="modal"
+                              aria-label="Close"
+                            >
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <form id="formEditPizzas">
+                            <div class="modal-body">
+                              <div class="form-group">
+                                <label for="name" class="col-form-label"
+                                  >Nombre:</label
+                                >
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  id="name"
+                                />
+                              </div>
+                              <div class="form-group">
+                                <label for="origin" class="col-form-label"
+                                  >Origen:</label
+                                >
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  id="origin"
+                                />
+                              </div>
+                            </div>
+                            <div class="modal-footer">
+                              <button
+                                type="button"
+                                class="btn btn-light"
+                                data-dismiss="modal"
+                              >
+                                Cancelar
+                              </button>
+                              <button
+                                type="button"
+                                id="btnGuardar"
+                                class="btn btn-dark"
+                                @click="
+                                  btnEditar(pizza.id, pizza.name, pizza.origin)
+                                "
+                              >
+                                Guardar
+                              </button>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div> -->
+
                     <button
                       class="btn btn-danger"
                       title="Eliminar"
@@ -325,11 +390,9 @@ export default {
         showCancelButton: true,
       }).then((result) => {
         if (result.value) {
-          console.log(id);
-          console.log(name);
-          console.log(document.getElementById("name").value);
           this.name = document.getElementById("name").value;
           this.origin = document.getElementById("origin").value;
+          console.log(name);
           this.editarPizza(id, this.name, this.origin);
           Swal.fire(
             "¡Actualizada!",
@@ -475,8 +538,6 @@ export default {
       }).then((response) => {
         this.fetch();
       });
-      this.name = "";
-      this.origin = "";
     },
     //Procedimiento BORRAR.
     eliminarPizza: function(id) {
